@@ -29,14 +29,14 @@ Once downloaded, to run WPScan using Docker, you will need to call the Docker im
 docker run -it --rm wpscanteam/wpscan --url example.com
 ```
 
-Breaking down the above, we call on Docker to run the **wpscanteam/wpscan** image in an interactive mode (using the **-it** flag). The **--rm** flag will remove the running image once the app has completed, cleaning up after itself.
+Breaking down the above, we call on Docker to run the `wpscanteam/wpscan` image in an interactive mode using the `-it` flag and the `--rm` flag will remove the running image once the app has completed, cleaning up after itself.
 
 WPScan provides a number of arguments that you can pass. Some of the more common arguments you may wish to run:
-- **–url** -- Define the URL to run the scan against
-- **–force** -- Force the scan, such as when the initial check suggests that the target domain is not a WordPress site
-- **–enumerate u** -- Gather information on users
-- **–api-token** -- Allows you to add your WPVulnDB API token in to scan the site against known vulnerabilities in the database
-- **—wp-content-dir** -- Define where the URL for the wp-content directory. This is useful when the content may be served over a CDN on a custom URL
+- `–url` -- Define the URL to run the scan against
+- `–force` -- Force the scan, such as when the initial check suggests that the target domain is not a WordPress site
+- `–enumerate u` -- Gather information on users
+- `–api-token` -- Allows you to add your WPVulnDB API token in to scan the site against known vulnerabilities in the database
+- `—wp-content-dir` -- Define where the URL for the wp-content directory. This is useful when the content may be served over a CDN on a custom URL
 
 The above put together would look like this:
 
@@ -87,13 +87,13 @@ As noted in the earlier example, it's possible to pass along an API token. It's 
 > &nbsp;&nbsp;&nbsp;YOUR_API_TOKEN
 {:.blockquote-style}
 
-It took me some experimentation to successfully link my local API YAML file to the docker container using volumes. Reading over the [WPScan dockerfile](https://hub.docker.com/r/wpscanteam/wpscan/dockerfile) I was able to descern that the docker container uses the **/wpscan** directory to deploy the app in. Using this information, I was able to link my local file to be shared within the Docker container as follows:
+It took me some experimentation to successfully link my local API YAML file to the docker container using volumes. Reading over the [WPScan dockerfile](https://hub.docker.com/r/wpscanteam/wpscan/dockerfile) I was able to descern that the docker container uses the `/wpscan` directory to deploy the app in. Using this information, I was able to link my local file to be shared within the Docker container as follows:
 
 ```shell
 docker run -it --rm -v ${HOME}/.wpscan/scan.yml:/wpscan/.wpscan/scan.yml wpscanteam/wpscan --url https://example.com
 ```
 
-With the above command, we are using the **-v** flag to create a volume, linking our local filesystem with the Docker container in the format of **source:destination**. This allows Docker to read the content of the file and we no longer need to pass the **--api-token** flag when running a scan.
+With the above command, we are using the `-v` flag to create a volume, linking our local filesystem with the Docker container in the format of `source:destination`. This allows Docker to read the content of the file and we no longer need to pass the `--api-token` flag when running a scan.
 
 Whether it is the database or the app itself that gets updated, it sometimes becomes necessary to update the Docker image when you start seeing this when seeing the following message:
 

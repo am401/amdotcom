@@ -53,4 +53,19 @@ With this challenge we were presented with a simple front end API documentation:
 
 <img src="/assets/images/swaggy_challenge_front_end.png">
 
+When we expand the information on the `GET` request, we get some additional information including what the response will look like on a successful request. In the first screenshot, there is a button for **Authorize**. This allows us to enter a username and password and just below it we have a button called **Try it out**. Hitting that builds a query to the API with the necessary headers and the authorization header generated from the username and password.
+
+<img src="/assets/images/swaggy_challenge_api_expended.png">
+
+I also noticed beyond the above options that there is a dropdown to select the server. We can toggle between `api.congon4tor.com/v1/flag`, which is the production server as well as `staging-api.congon4tor.com:7777`, which is their staging server.
+
+I had no successful results for the production server and started to think whether all the pieces fit together to an incorrectly or lightly configured staging server. I started using basic username and password combinations, such as `admin:password`, `admin:test` and such. On one of the attempts, the combination of `admin:admin` worked on the staging server, yielding our flag. The `cURL` looked like this:
+
+```shell
+curl -X 'GET' \
+  'http://staging-api.congon4tor.com:7777/flag' \
+  -H 'accept: application/json' \
+  -H 'Authorization: Basic YWRtaW46YWRtaW4='
+{"flag":"flag{e04f962d0529a4289a685112bf1dcdd3}"}
+```
 
