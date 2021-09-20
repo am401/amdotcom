@@ -1,0 +1,21 @@
+markdown: kramdown
+highlighter: rogue
+kramdown:
+  input: GFM
+  syntax_highlighter_opts:
+    default_lang: html
+    css_class: 'highlight'
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+      start_line: 1
+name: andras marton dot com
+title: andras marton dot com
+baseurl: /
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      layout: "default"
