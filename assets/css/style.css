@@ -49,6 +49,12 @@ ul, li {
     font-family: sans-serif;
 }
 
+.homepage-desc {
+    font-family: sans-serif;
+    color: #fff;
+    font-size: 16px;
+}
+
 a, a:visited {
     color: #0ebfe9;
     text-decoration: none;

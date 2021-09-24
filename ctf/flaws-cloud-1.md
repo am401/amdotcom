@@ -1,4 +1,4 @@
- ---
+---
 layout: default
 title: flAWS Cloud 1
 meta: flAWS Cloud  CTF highlighting common mistakes and gotchas using AWS
