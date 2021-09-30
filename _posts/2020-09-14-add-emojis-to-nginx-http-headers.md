@@ -4,7 +4,7 @@ layout: default
 description: Introduce emojies into your HTTP response headers using NGINX 
 ---
 
-## Written: 2020/04/29
+Written: 2020/04/29
 
 The idea to explore adding emojis into response headers came after reading the following [Tweet by @elenalindq](https://twitter.com/elenalindq/status/1304651703904546816), specifically mentioning [icanhazip.com](https://icanhazip.com), which at the time of writing has a duck emoji HTTP response header as ween below:
 

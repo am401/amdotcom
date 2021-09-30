@@ -4,7 +4,8 @@ layout: default
 description: Scan WordPress websites for security vulnerabilities using WPScan and Docker
 ---
 
-## Written: 2020/04/29 // Updated: 2021/08/30
+Written: 2020/04/29 // Updated: 2021/08/30
+
 One of the best features of WordPress is that it is Open Source, allowing for the likes of you and I to modify it as we please by creating plugins or altering the look and feel by customizing themes.
 
 This adaptability of WordPress and its thriving community is amazing, however it can occasionally lead to vulnerabilities being introduced to sites. While security issues can be found in the WordPress core files, the primary source is often through third party plugins, available on the WordPress ecosystem. [WP Scan's July 2021 Vulnerability statistics](https://blog.wpscan.com/wordpress-vulnerability-statistics-for-july-2021/) shed some light on this, highlighting that during July 2021 a total of **158 Plugin vulnerabilities** were added to their database compared to **5 Theme vulnerabilities** and no WordPress core vulnerabilities being added.

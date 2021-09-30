@@ -4,7 +4,7 @@ layout: default
 description: Techniques to use cURL when troubleshooting website connectivity issues and general cURL information
 ---
 
-## Written: 2020/11/29
+Written: 2020/11/29
 
 I use [cURL](https://curl.se/) on a regular basis to troubleshoot a variety of issues both at work and while working on projects. It is an excellent tool to get an idea of what is happening when a request is made to a website. While this tool is vast in its features including connecting via `SFTP`, I will not be covering those steps within this article.
 

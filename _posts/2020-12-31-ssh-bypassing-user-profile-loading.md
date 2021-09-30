@@ -4,7 +4,7 @@ layout: default
 description: Prevent a user profile being loaded when connecting over SSH
 ---
 
-## Written: 2020-12-31
+Written: 2020-12-31
 
 I recently ran into an issue where I was completing a Git merge, following a fetch of the latest version of a remote repo. On this occasion I ran into a merge conflict, however I overlooked this and thought everything had completed as expected. My next step in the testing workflow was to build out a `.deb` package and upload it to one of our dev servers and install it.
 

@@ -4,7 +4,7 @@ layout: default
 description: Protect specific directories for WordPRess websites using NGINX
 ---
 
-## Written: 2020/12/31
+Written: 2020/12/31
 
 I've recently had a number of requests for custom NGINX rules to be created in order to protect WordPress upload directories. This scenario may surface if you are using NGINX as your primary web server or NGINX sits before say an upstream Apache server and the `.htaccess` files is not an option.
 
