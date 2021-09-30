@@ -1,0 +1,4 @@
+Contact: mailto:security@andrasmarton.com
+Preferred-Languages: en
+Canonical: https://www.andrasmarton.com/.well-known/security.txt
+
