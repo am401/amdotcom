@@ -93,7 +93,7 @@ This challenge required a **Docker** container to be started which lead me to th
 
 The page is a fairly simple **HTML** page from what I can tell. Based on the challenge, it feels like we are trying to find clue's to the key, which has its start printed on the homepage as **CHTB{**. Looking at the source code, I immediately noticed this comment towards the bottom of the page:
 
-```
+```html
 <!--1nsp3ction_-->
 </html>
 ```
@@ -106,7 +106,7 @@ I suspected the **1nsp3ction_** comment was part of the key and  was guiding me 
 
 During this review, within the **/static/js/main.js** file, I found the message to our console window that we found earlier:
 
-```
+```html
 /* c4n_r3ve4l_ */
 ```
 

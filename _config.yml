@@ -1,22 +1,9 @@
-markdown: kramdown
-highlighter: rouge
-kramdown:
-  input: GFM
-  syntax_highlighter: rogue
-  syntax_highlighter_opts:
-    css_class: 'highlight'
-    default_lang: html
-    span:
-      line_numbers: false
-    block:
-      line_numbers: true
-      start_line: 1
-name: andras marton dot com
-title: andras marton dot com
-baseurl: /
-defaults:
-  -
-    scope:
-      path: ""
-    values:
-      layout: "default"
+tite: andras marton dot com
+email: mail@andrasmarton.com
+description: >-
+  My personal blog covering cyber security, programming and technology.
+baseurl: ""
+url: "https://www.andrasmarton.com"
+include:
+  - .well-known
+

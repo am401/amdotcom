@@ -10,7 +10,7 @@ I recently ran into an issue where I was completing a Git merge, following a fet
 
 This wouldn't have been an issue, however the `.bashrc` on this occasion happens to call a a shell script when a user logs in over SSH. The merge conflit I mentioned was accidentally introduced in this shell script that is automatically called and I was starting to hit errors when trying to log in:
 
-```
+```shell
 -bash: /usr/local/lib/path/to/the/script.sh: line 20: syntax error near unexpected token `&lt;&lt;&lt;'
 -bash: /usr/local/lib/<code>path/to/the/script</code>.sh: line 20: `&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD'
 Connection to dev.server closed.
@@ -18,7 +18,7 @@ Connection to dev.server closed.
 
 I essentially locked myself as well as all the other users out of accessing this server, since the Git merge conflict headers were present in the script that was automatically called by the profile. After some research, I located a handy method to starting a SSH connection and calling Bash without a user profile:
 
-```
+```shell
 ssh user@dev.server "bash --noprofile"
 ```
 
@@ -26,13 +26,13 @@ The `--noprofile` flag specifically prevents profiles from loading as explained 
 
 This is great, I was able to log in without the critical error and getting thrown out of the SSH session, however at the same time, what I found was that this also meant a `TTY` terminal control session was not started and I was unable to run commands such as `sudo` in order to edit or remove the file causing the issues. I kept running into the following error:
 
-```
+```shell
 sudo: no tty present and no askpass program specified
 ```
 
 After some searching I found a great article on [shell-tips.com](https://www.shell-tips.com/linux/sudo-no-tty-present-and-no-askpass-program-specified/) that shed some further light on to what was happening with regard to the lack of a `TTY` session and the proposed fix being adding the `-t` flag to the `SSH` call. In a nutshell the flag provides a pseudo-sudo shell when the connection is made, allowing me to run `sudo` commands without loading the profiles that were calling the corrupt file. The command in full would be:
 
-```
+```shell
 ssh -t user@dev.server "bash --noprofile"
 ```
 
