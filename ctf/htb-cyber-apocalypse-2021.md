@@ -76,10 +76,14 @@ Current decoded message is: UTBoVVFuc3pibU13WkRGdVoxOXVNSFJmTTNGMU5HeGZkREJmTTI1
 
 Current decoded message is: Q0hUQnszbmMwZDFuZ19uMHRfM3F1NGxfdDBfM25jcnlwdDEwbn0=
 
-The flag is: CHTB{3nc0d1ng_n0t_3qu4l_t0_3ncrypt10n}
+The flag is: SEE BELOW 
 ```
 
-As we can see, the flag for this challenge is **CHTB{3nc0d1ng_n0t_3qu4l_t0_3ncrypt10n}**.
+<details>
+<summary>Flag</summary>
+<div><pre><code>CHTB{3nc0d1ng_n0t_3qu4l_t0_3ncrypt10n}</code></pre>
+</div>
+</details>
 
 ## Web Challenge - Inspector Gadget
 
@@ -109,5 +113,9 @@ During this review, within the **/static/js/main.js** file, I found the message 
 ```html
 /* c4n_r3ve4l_ */
 ```
-
-Using the four different pieces I found, we can now build out our key: **CHTB{1nsp3ction_c4n_r3ve4l_us3full_Inf0rm4tion}**, suggesting that digging around and inspecting all the files lead us to the key.
+Using the four different pieces I found, we can now build out our flag, suggesting that digging around and inspecting all the files lead us to the key.
+<details>
+<summary>Flag</summary>
+<div><pre><code>CHTB{1nsp3ction_c4n_r3ve4l_us3full_Inf0rm4tion}</code></pre>
+</div>
+</details>

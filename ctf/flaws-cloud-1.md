@@ -58,20 +58,16 @@ This XML file does not appear to have any style information associated with it. 
 </ListBucketResult>
 ```
 
-Towards the bottom, we can see a file called **secret-dd02c7c.html**. When we visit the page we are greeted with the following message:
+Towards the bottom, we can see a file called **secret-dd02c7c.html**. When we visit the page we find our flag.
 
-```
-_____  _       ____  __    __  _____
-|     || |     /    ||  |__|  |/ ___/
-|   __|| |    |  o  ||  |  |  (   \_
-|  |_  | |___ |     ||  |  |  |\__  |
-|   _] |     ||  _  ||  `  '  |/  \ |
-|  |   |     ||  |  | \      / \    |
-|__|   |_____||__|__|  \_/\_/   \___|
-
-Congrats! You found the secret file!
+<details>
+<summary>Flag</summary>
+<div>
+<pre><code>Congrats! You found the secret file!
 Level 2 is at http://level2-c8b217a33fcf1f839f6f1f73a00a9ae7.flaws.cloud
-```
+</code></pre>
+</div>
+</details>
 
 Following the above link leads us to Level 2. The above link provides some additional information on how to avoid exposing AWS bucket based sites in a similar manner.
 
@@ -98,17 +94,15 @@ aws s3 --profile myprofile ls s3://level2-c8b217a33fcf1f839f6f1f73a00a9ae7.flaws
 
 We can see the **secret-e4443fc.html** towards the bottom. Visiting that page we get the following message:
 
-```
-_____  _       ____  __    __  _____
-|     || |     /    ||  |__|  |/ ___/
-|   __|| |    |  o  ||  |  |  (   \_
-|  |_  | |___ |     ||  |  |  |\__  |
-|   _] |     ||  _  ||  `  '  |/  \ |
-|  |   |     ||  |  | \      / \    |
-|__|   |_____||__|__|  \_/\_/   \___|
+<details>
+<summary>iFlag</summary>
+<div>
 
-Congrats! You found the secret file!
+<pre><code>Congrats! You found the secret file!
 Level 3 is at http://level3-9afd3927f195e10225021a578e6f78df.flaws.cloud
-```
+</code></pre>
+
+</div>
+</details>
 
 Much like the previous level, navigating to the third level gives us insight as to what caused us the ability to list out the content.

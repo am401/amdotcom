@@ -172,7 +172,7 @@ img {
 /* Code block experiment */
 
   pre {
-    background-color: #323232;
+    background-color: #262626;
     text-align: left;
     overflow: auto;
     font-family: 'Monaco', monospace;
@@ -185,7 +185,7 @@ code {
     text-align: left;
     font-size: $base-font-size;
     line-height: 100%;
-    background-color: #323232;
+    background-color: #262626;
     padding: 0.2em;
     letter-spacing: -0.05em;
     word-break: normal;
@@ -201,3 +201,20 @@ pre code {
     letter-spacing: normal;
     word-break: break-all;
   }
+
+details > summary {
+    background-color: #fdb;
+    cursor: pointer;
+    padding: .5rem 1rem;
+    color: #000;
+}
+
+details summary > * {
+    display: inline;
+}
+
+details > div {
+  border: 2px solid #fdb;
+  margin-top: 0;
+  padding: 1rem;
+}

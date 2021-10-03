@@ -34,14 +34,16 @@ wombo pulled the text up in a text editor and started to zoom out until the text
 
 <img src="/assets/images/bass64_challenge_text.png">
 
-As the challenge name indicated, I suspected this was encoded in **base64** therefore I attempted to decode it:
+As the challenge name indicated, I suspected this was encoded in **base64** therefore I attempted to decode it, which gave us our first flag:
 
-```shell
-echo "IGZsYWd7MzVhNWQxM2RhNmEyYWZhMGM2MmJmY2JkZDYzMDFhMGF9" | base64 -d
- flag{35a5d13da6a2afa0c62bfcbdd6301a0a}
-```
 
-With that we got our flag!
+<details>
+<summary>Flag</summary>
+<div>
+<pre><code>echo "IGZsYWd7MzVhNWQxM2RhNmEyYWZhMGM2MmJmY2JkZDYzMDFhMGF9" | base64 -d
+ flag{35a5d13da6a2afa0c62bfcbdd6301a0a}</code></pre>
+</div>
+</details>
 
 ## Swaggy
 ### Challenge notes
@@ -59,15 +61,19 @@ When we expand the information on the `GET` request, we get some additional inst
 
 I also noticed there is a dropdown to select the server. We can toggle between `api.congon4tor.com/v1/flag`, which is the production server as well as `staging-api.congon4tor.com:7777`, which is their staging server.
 
-I had no successful results for the production server and started to think how all the pieces fit together and if the challenge could be a misconfigured or loosely set up staging server. I started using basic username and password combinations, such as `admin:password`, `admin:test` and such. On one of the attempts, the combination of `admin:admin` worked on the staging server, yielding our flag. The `cURL` looked like this:
+I had no successful results for the production server and started to think how all the pieces fit together and if the challenge could be a misconfigured or loosely set up staging server. I started using basic username and password combinations, such as `admin:password`, `admin:test` and such. On one of the attempts, the combination of `admin:admin` worked on the staging server, yielding our flag:
 
-```shell
-curl -X 'GET' \
+<details>
+<summary>Flag</summary>
+<div>
+<pre><code>curl -X 'GET' \
   'http://staging-api.congon4tor.com:7777/flag' \
   -H 'accept: application/json' \
   -H 'Authorization: Basic YWRtaW46YWRtaW4='
 {"flag":"flag{e04f962d0529a4289a685112bf1dcdd3}"}
-```
+</code></pre>
+</div>
+</details>
 
 ## Butter Overflow
 ### Challenge notes
@@ -157,12 +163,15 @@ The argument `buffer` allows for the HEX value `0x200`, which is **512** in deci
 
 Since I couldn't find any validation for the `buffer` variable, I had a feeling if we provide it more than **%12** characters, we will achieve the memory violation and end up with a buffer overflow. The challenge has us connect to a remote server to interact with the application:
 
-```shell
-nc challenge.ctf.games 30054
+<details>
+<summary>Flag</summary>
+<div>
+<pre><code>nc challenge.ctf.games 30054
 How many bytes does it take to overflow this buffer?
 iwtabmdbtrboztzgyoeiajvhbcceayolgegbzoxnhsamzmdqgwodkoqxlaamvfcrgpwxbcfaeqsavjzyjgsdftbfiwnaiujjwtcgycgyclbfoqvqfcnqgaooaekxbywvodtqwzwkuafnqasmolzmhabduoyvzjbnfvvwwdempilvajczdcfgjgtdgrbdhovfmdbeqecphdhkoqepxhehcveddetkyoznjhwtjmoaokxqjfzfepppangcoluiakoxgcpxwhmufocokwllbwzqvuyrwbmxgkokxmunonygzaevgocxjenvmylmzqvztyhorywyjfnfurfgzeitjeeuslegkjtibywkzcjztdxxxnpllroptmxsuxroxxwizaxrmonnuugwotgtndpczbhhdnvxddkbqvlyvvzptpdmvxrcgtopasbmuargfkryxdspsqpfobiroxssasckqiynqgiyozrkxkqyvwpsfycsjlngzxuotndwarzwpbddovofecnutfrkjikangexxt
-flag{72d8784a5da3a8f56d2106c12dbab989}
-```
+flag{72d8784a5da3a8f56d2106c12dbab989}</code></pre>
+</div>
+</details>
 
 The above string was a random **530** byte string that I generated and we can see the flag returned at the bottom.
 
@@ -208,9 +217,15 @@ reach
 cd reach
 ls
 flag.txt
-cat flag.txt
-flag{2d43e30a358d3f30fe65cc47a9cbbe98}
 ```
+
+<details>
+<summary>Flag</summary>
+<div>
+<pre><code>cat flag.txt
+flag{2d43e30a358d3f30fe65cc47a9cbbe98}</code></pre>
+</div>
+</details>
 
 As can be seen, that allowed us to execute `ls` and we found a directory that branched out to a number of sub directories until we got to our flag.
 
@@ -270,7 +285,12 @@ file 2ez
 
 After adjusting the header, the file is now recognized as a `JPEG` file and we can open it to reveal the flag:
 
+<details>
+<summary>Flag</summary>
+<div>
 <img src="/assets/images/2ez_challenge_flag.png">
+</div>
+</details>
 
 ## Titanic
 ### Challenge notes
@@ -344,7 +364,12 @@ Which gave us the following result:
 
 We can see a number requests which have come in to the site including a few requests to the `admin.php` page, including the username and password in plain text `/admin.php?uname=root&psw=EYNDR4NhadwX9rtef`. Visiting this URL yields us the flag:
 
+<details>
+<summary>Flag</summary>
+<div>
 <img src="/assets/images/titanic_challenge_flag.png">
+</div>
+</details>
 
 ## Jed Sheeran
 ### Challenge notes
@@ -362,7 +387,12 @@ Opening the Sound Cloud page indicated we were on the right track (no pun intend
 
 I noticed some comments on that music file so I went to check them out, and voila, we got our flag:
 
+<details>
+<summary>Flag</summary>
+<div>
 <img src="/assets/images/jed_sheeran_challenge_flag.png">
+</div>
+</details>
 
 ## Mike Shallot
 ### Challenge notes
@@ -382,7 +412,12 @@ This seemed promising. Two random strings were provided so I started to research
 
 Firing up Tor and navigating to the URL, I tested out what a paste will look like, which indicated it uses a combination of two random strings split with a slash, much like the second string found originally. I used the fully URL given - `strongerw2ise74v3duebgsvug4mehyhlpa7f6kfwnas7zofs3kov7yd.onion/pduplowzp/nndw79` in Tor and got our flag:
 
+<details>
+<summary>Flag</summary>
+<div>
 <img src="/assets/images/mikeshallot_challenge_flag.png">
+</div>
+</details>
 
 ## End
 Overall these were great challenges and I've learnt plenty. The most interesting thing as mentioned was using `vim` as a HEX editor. I look forward to reading up additional writeups from others for challenges that left me puzzled or where I came close to figuring it out but did not have a chance.

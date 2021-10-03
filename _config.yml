@@ -7,4 +7,7 @@ url: "https://www.andrasmarton.com"
 include:
   - .well-known
   - _redirects
-
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
