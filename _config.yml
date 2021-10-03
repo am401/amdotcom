@@ -6,4 +6,5 @@ baseurl: ""
 url: "https://www.andrasmarton.com"
 include:
   - .well-known
+  - _redirects
 
