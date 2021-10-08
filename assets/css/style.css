@@ -12,7 +12,6 @@ ul, li {
     font-family: sans-serif;
 }
 
-
 .heading {
     margin-top: 30px;
     margin-bottom: 30px;
@@ -171,14 +170,15 @@ img {
 
 /* Code block experiment */
 
-  pre {
+pre {
     background-color: #262626;
     text-align: left;
     overflow: auto;
     font-family: 'Monaco', monospace;
     padding:  1em;
     border-radius: 15px;
-  }
+    width: 100%;
+}
 
 code {
     font-family: Monaco, monospace;
@@ -189,8 +189,8 @@ code {
     padding: 0.2em;
     letter-spacing: -0.05em;
     word-break: normal;
-    /border-radius: 5px;/
-  }
+    border-radius: 5px;
+}
 
 pre code {
     border: none;
@@ -200,7 +200,7 @@ pre code {
     line-height: 1em;
     letter-spacing: normal;
     word-break: break-all;
-  }
+}
 
 details > summary {
     background-color: #fdb;
