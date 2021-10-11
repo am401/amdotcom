@@ -3,6 +3,8 @@ layout: default
 title: CTF
 ---
 
+### [0xf.at](/ctf/0xfat)
+
 ### [H@cktivityCon 2021 CTF](/ctf/hacktivitycon-2021-ctf)
 
 ### [flAWS Cloud 1](/ctf/flaws-cloud-1)
