@@ -1,6 +1,7 @@
 ---
 layout: default
 title: flAWS Cloud 1
+permalink: /ctf/flaws-cloud-1/
 ---
 
 {:.warning-header}

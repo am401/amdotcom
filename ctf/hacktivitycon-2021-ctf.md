@@ -1,6 +1,7 @@
 ---
 layout: default
 title: H@cktivityCon 2021 CTF
+permalink: /ctf/hacktivitycon-2021-ctf/
 ---
 
 {:.warning-header}

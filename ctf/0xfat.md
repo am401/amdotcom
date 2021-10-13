@@ -1,6 +1,7 @@
 ---
 layout: default
 title: 0xfat
+permalink: /ctf/0xfat/
 ---
 
 {:.warning-header}
