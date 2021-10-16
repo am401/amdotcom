@@ -1,7 +1,7 @@
 ---
 layout: default
 title: HTB Cyber Apocalypse 2021
-permalink: /ctf/htb-cyber-apocalpyse-2021/
+permalink: /ctf/htb-cyber-apocalypse-2021/
 ---
 
 {:.warning-header}

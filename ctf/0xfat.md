@@ -7,9 +7,11 @@ permalink: /ctf/0xfat/
 {:.warning-header}
 ## These CTF write-ups contain spoilers
 
-### Written: 2021/10/10
+### Written: 2021/10/10 // Updated: 2021/10/15
 
 ---
+
+
 
 [0xf.at](http://0xf.at) is a hackit style password-riddle site. The [GitHub Project](https://github.com/HaschekSolutions/0xf.at) has setup instructions to configure it locally using Docker. The framework also allows a user to create their own levels and add them to the overall project.
 
@@ -408,7 +410,7 @@ Try not to be fooled
                 document.location.href="?pw="+el.value;
             else alert("Wrong password");
         }
-        
+
     </script>
 <!-- ::::::::::::::::::==== GAME ENDS HERE ====:::::::::::::::::: -->
 {% endhighlight %}
@@ -458,7 +460,7 @@ else return false;
             var el = document.getElementById("pw");
             document.location.href="?pw="+el.value;
         }
-        
+
     </script>
 <!-- ::::::::::::::::::==== GAME ENDS HERE ====:::::::::::::::::: -->
 {% endhighlight %}
@@ -497,7 +499,7 @@ The password is the sum of all numbers from 1 to 477
             var el = document.getElementById("pw");
             document.location.href="?pw="+el.value;
         }
-        
+
     </script>
 <!-- ::::::::::::::::::==== GAME ENDS HERE ====:::::::::::::::::: -->
 {% endhighlight %}
@@ -572,7 +574,7 @@ else return false;
             var user = document.getElementById("user");
             document.location.href="?pw="+pw.value+"&name="+user.value;
         }
-        
+
     </script>
 <!-- ::::::::::::::::::==== GAME ENDS HERE ====:::::::::::::::::: -->
 {% endhighlight %}
@@ -611,7 +613,7 @@ function pwCheck($guid,$password)
 <!-- :::::::::::::::::==== GAME STARTS HERE ====::::::::::::::::: -->
     <h1>Level 14</h1>
     <p>The following function defines the login process</p>
-    
+
     <div></div>
     <pre><code class="language-php">function pwCheck($guid,$password)
 {
@@ -688,7 +690,7 @@ npveei
 </code></pre>
 
 <form method="GET">
-    Testing input: 
+    Testing input:
     <input name="text" type="text" /> <input type="submit" name="submit" value="Test algorithm"/>
     <br/><br/>
     Decoded password:<br/>
@@ -755,7 +757,7 @@ else return false;
             var el = document.getElementById("pw");
             document.location.href="?pw="+el.value;
         }
-        
+
     </script>
 
 <!-- ::::::::::::::::::==== GAME ENDS HERE ====:::::::::::::::::: -->
@@ -821,7 +823,7 @@ The following password is encoded in morse code. Each character is seperated by 
 After 60 seconds this page will submit/refresh automatically. So.. be faster than that.
 
 {% highlight html %}
-−−... .−−−− ...−− −.. ....− −.. −.−. −... 
+−−... .−−−− ...−− −.. ....− −.. −.−. −...
 {% endhighlight %}
 
 {% highlight html %}
@@ -862,7 +864,7 @@ Flag: 5D2D84D9</code></pre>
 </div>
 </details>
 
-## Level 20
+## Level 19
 ### Challenge notes
 
 <img src="/assets/images/0xfat_level_19.png">
@@ -884,9 +886,9 @@ Flag: 5D2D84D9</code></pre>
     I =&gt; <span class="blue">4444</span><br/>
     W =&gt; <span class="blue">99</span><br/>
     Z =&gt; <span class="blue">99999</span><br/><br/>
-    
+
     <p>"HEY" =&gt; <span class="blue">444 333 9999</span> =&gt; <span class="blue">4+4+4+3+3+3+9+9+9+9</span> = <u>57</u></p>
-    
+
     <p>You have <strong>15 seconds</strong> to submit the right solution. Each time you reload this page the password changes.</p>
 </div>
 <pre><code class="">f77738e4bbcb039b5b04c7c15f60cb98</code></pre>
@@ -930,5 +932,189 @@ Running the above script and supplying the string provided by the challenge gets
 <div>
 <pre><code>python level20.py 53bc79918220509808a10046f70c67e4
 158</code></pre>
+</div>
+</details>
+
+## Level 20
+### Challege notes
+
+{:.blockquote-style}
+The password of this level is an MD5 encrypted string which was calculated by combining two random words (without spaces) from >>this wordlist<< (144kb).
+Can you find out which two words were used?
+
+{% highlight html %}
+94038af05987a8f39820992dbc2d7fea
+{% endhighlight %}
+
+At this stage the challenges are becoming more and more reliant on programming. This challenge has us download a word list that contains **68847** words. Two random words are taken and their **MD5** hash is generated. To solve the challenge, we are asked to find the two random words that were encrypted.
+
+I decided to use Python to figure this out. On an initial research, I found an [article](https://www.md5online.org/blog/decrypt-md5-python/). We can use the `hashlib` to encrypt our combined words to get their MD5 hash. We can then run through the list combining the words from our wordlist, calculate their MD5 hash and compare if this matches the one we are provided.
+
+I am personally not familiar with threading, therefore my script is relatively slow in that respect and this could be considerably sped up with multi-threading, however that wasn't my aim. Another option is GoLang is meant to have decent multi-threading capabilities.
+
+I essentially came up with two ideas and it was the second idea that worked but either is an option. One thing to consider, I use the `0xf.at` **Docker** container and each time the container is restarted, a new hash is generated.
+
+### Solution one
+The first solution is to create an application that will run through the word list, combining the two wods and compare the generated hash to the one `0xf.at` provided. The script can then alert us to which two words successfully matched the hash.
+
+{% highlight python %}
+import hashlib
+import sys
+
+def open_file():
+    with open('wordlist.txt', 'r') as f:
+        words = f.read().splitlines()
+    return words
+
+a = open_file()
+b = open_file()
+
+for x in a:
+    for y in b:
+        c = x + y
+        calc_hash = hashlib.md5(c.encode())
+        hash_val = calc_hash.hexdigest()
+        password = "0d5d4abe4a0c61bd3117e895cf90da83"
+        print(c)
+        if hash_val == password:
+            print("The decrypted value is: " + c)
+            sys.exit()
+{% endhighlight %}
+
+### Solution two
+The second idea is to create a [Rainbow Table](https://project-rainbowcrack.com/table.htm), which is essentially a pre-compiled table of cryptographic hashes and their plaintext value that can be searched. The idea still works the same, create a table with the combined words and their MD5 hash and once done, search through it for the given hash.
+
+I ran into some limitations with this one. I built the script out on my RaspberryPi and left it running overnight in a `screen`. By the morning my rainbow table was sitting at **45GB** with *939,645,348* lines generated. The first record being `aaaa: 74b87337454200d4d33f80c4663dc5e5` and the table only getting to `bucktoothbanquets: 93e073c8fb9fd8439fe9bcc28d4b6b41`.
+
+This script essentially saves the result of the combined words and their hash to a file.
+
+{% highlight python %}
+import hashlib
+import sys
+
+def open_file(filename):
+    with open(filename, 'r') as f:
+        words = f.read().splitlines()
+    return words
+
+def save_file(filename,result):
+    with open (filename, "a+") as file:
+        file.write(result)
+
+a = open_file('wordlist.txt')
+b = open_file('wordlist.txt')
+
+for x in a:
+    for y in b:
+        c = x + y
+        calc_hash = hashlib.md5(c.encode())
+        hash_val = calc_hash.hexdigest()
+
+        result = "\n" + c + ": " + hash_val
+        save_file('rainbowtable.txt', result)
+{% endhighlight %}
+
+I ended up rebooting my `Docker` container running `0xf.at` and searching through the existing table, I was able to find the result.
+
+<details>
+<summary>Flag</summary>
+<div>
+<pre><code>grep -m 1 08b2e0dfcae2a7597fc59b11428179a9 rainbowtable.txt
+beckoninghandiworks: 08b2e0dfcae2a7597fc59b11428179a9</code></pre>
+<img src="/assets/images/0xfat_level_20.png">
+</div>
+</details>
+
+## Level 21
+### Challenge notes
+
+{:.blockquote-style}
+The text below are semicolon seperated and scrambled words from >>THIS DICTIONARY<< (134 KB).
+Can you unscramble them in 30 Seconds or less?
+
+{% highlight html %}
+enisrtven;iecsnlsh;teiava;foeshodrwe;isedvas;ednoida;melslbul;snleos;iaetllr;ictuzedni
+{% endhighlight %}
+
+I approached Python again to automate out this task. We are again given a wordlist to download and instructions to solve the channel. In this case we are given a string of jumbled words separated by semicolons. When unscrambled, these words match words within the provided word list.
+
+I went through a lot of variations of this script. I first tried to generate each possible combination of a word and compare it to existing words in the list, however this was taking forever.
+
+I then tried to get the length of the longest and shortest words in the provided string and filter out words that did not meet the criteria when reading in the word list, however in the end this removed roughly 3000 words of again **68847** words.
+
+I tried permutating functions, libraries and such but again was taking forever. The winning idea was to read in the provided string, split it at the semicolons and break down each word into characters. Using `set()` I could ensure we filtered it down to unique characters and I could then use `sort()` to ensure they were in order. This method was applied to both the word from the provided string and the one from the word list. If the letters matched, the length of the word would be considered to ensure it matched the length of the word from `0xf.at`.
+
+Unfortunately this can mean that multiple words are matched that contain the same number of the same characters so it's currently a few tries before I get a successful string. I'll update this article if I figure out a better way to solve this challenge.
+
+{% highlight python %}
+import sys
+
+input_string = sys.argv[1]
+input_list = list(input_string.split(';'))
+
+def open_file(filename):
+    with open(filename) as f:
+        words = f.read().splitlines()
+    return words
+
+def check_words(s,ch):
+    return set(sorted(s)) == set(sorted(ch))
+
+word_list = open_file('wordlist.txt')
+
+result = []
+for i in input_list:
+    char_list = list(set(i))
+    char_list = ''.join(char_list)
+    for word in word_list:
+        wordz = list(set(word))
+        if check_words(char_list, wordz):
+            if len(i) == len(word):
+                result.append(word)
+print(';'.join(result))
+{% endhighlight %}
+
+<details>
+<summary>Flag</summary>
+<div>
+<pre><code>python unscramble.py "arccaresi;nliosgh;nllicyoca;esfbiauite;dsroweb;gljoeg;aategidvnl;rntmdaoen;nasnmtaieenis;nactselua"
+cercarias;longish;conically;beautifies;browsed;joggle;galivanted;adornment;inanimateness;canulates</code></pre>
+<img src="/assets/images/0xfat_level_21.png">
+</div>
+</details>
+
+## Level 22
+### Challenge notes
+
+{:.blockquote-style}
+You have 10 Seconds to mirror the text below after the last character
+
+{% highlight html %}
+04411d099838c1039acdf00d9353ceab
+{% endhighlight %}
+
+{:.blockquote-style}
+Example:
+Text: abcdefg1234567890
+Solution: abcdefg1234567890987654321gfedcba
+
+For this challenge we are provided with a random string that we are asked to reverse and supply the combined value of the two as the password. What I found based on the example is the last character of the string is skipped, ie in the above example instead of `...78900987...` we have `...7890987...`.
+
+This just required an additional step to remove the last character from the string before reversing it:
+
+{% highlight python %}
+import sys
+
+string = sys.argv[1]
+remove_char = string [:-1]
+reverse = remove_char [::-1]
+print(string+reverse)
+{% endhighlight %}
+
+<details>
+<summary>Flag</summary>
+<div>
+<pre><code>python level22.py e86e6429f0ea5c3b91bf3b683202bedf
+e86e6429f0ea5c3b91bf3b683202bedfdeb202386b3fb19b3c5ae0f9246e68e</code></pre>
 </div>
 </details>

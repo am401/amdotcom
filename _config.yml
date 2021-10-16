@@ -1,4 +1,4 @@
-tite: andras marton dot com
+title: andras marton dot com
 email: mail@andrasmarton.com
 description: >-
   My personal blog covering cyber security, programming and technology.
@@ -11,4 +11,4 @@ markdown: kramdown
 kramdown:
   input: GFM
   syntax_highlighter: rouge
-permalink: /:slug
+permalink: :slug/

@@ -28,3 +28,4 @@ gh-pages/
 pkg/
 test/dest
 tmp/*
+Makefile
