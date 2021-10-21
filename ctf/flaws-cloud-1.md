@@ -95,7 +95,7 @@ aws s3 --profile myprofile ls s3://level2-c8b217a33fcf1f839f6f1f73a00a9ae7.flaws
 We can see the **secret-e4443fc.html** towards the bottom. Visiting that page we get the following message:
 
 <details>
-<summary>iFlag</summary>
+<summary>Flag</summary>
 <div>
 
 <pre><code>Congrats! You found the secret file!
