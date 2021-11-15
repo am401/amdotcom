@@ -110,6 +110,8 @@ img {
   margin-left: 50px;
   padding-left: 15px;
   border-left: 3px solid #ccc;
+  line-height: 25px;
+  overflow-wrap: break-word;
   color: #0b98ba;
 } 
 

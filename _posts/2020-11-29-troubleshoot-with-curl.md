@@ -16,7 +16,7 @@ One great feature of cURL is the ability to easily check the headers being retur
 
 To have cURL return the headers, pass the `-I` (capital i) or `--head` flags:
 
-```
+{% highlight shell %}
 curl -I https://example.com
 HTTP/2 200
 date: Sun, 29 Nov 2020 03:58:17 GMT
@@ -31,13 +31,13 @@ x-xss-protection: 1; mode=block
 x-content-type-options: nosniff
 x-frame-options: SAMEORIGIN
 referrer-policy: strict-origin
-```
+{% endhighlight %}
 
 The above is the output we get from getting the headers for a site. A useful flag to include with `-I` is `-L` or `--location`, which tells `cURL` to follow `HTTP 3XX` redirects. This flag is useful when you want to ensure your request gets to the last hop in a redirect chain.
 
 We can see this on sites where a redirect exists from the apex domain to the `www subdomain` of a site. Without the `-L` flag, the location would not be followed and the request would return a `HTTP/2 301` header, however we wouldn't be taken to a new location:
 
-```
+{% highlight bash %}
 curl -IL https://example.com
 HTTP/2 301
 date: Sun, 29 Nov 2020 04:04:05 GMT
@@ -59,18 +59,18 @@ x-xss-protection: 1; mode=block
 x-content-type-options: nosniff
 x-frame-options: SAMEORIGIN
 referrer-policy: strict-origin
-```
+{% endhighlight %}
 
 Within this set, useful flag to keep in mind is `-k` (`--insecure`) which will allow you to proceed even if an SSL connection error is detected. The output when requested a secure connect over HTTPS but hitting a certificate error looks like this:
 
-```
+{% highlight shell %}
 curl: (60) SSL certificate problem: certificate has expired
 More details here: https://curl.haxx.se/docs/sslcerts.html
 
 curl failed to verify the legitimacy of the server and therefore could not
 establish a secure connection to it. To learn more about this situation and
 how to fix it, please visit the web page mentioned above.
-```
+{% endhighlight %}
 
 As the examples above show, there is quite a lot of data there that may or may not be necessary for the task you are troubleshooting. To actually cover how I use the above here are some examples:
 
@@ -90,25 +90,25 @@ Cookies can be an important factor to test, whether a cookie was set or how a si
 
 Examples for the two would be:
 
-```
+{% highlight shell %}
 curl -b 'utm_market=abc123' https://example.com
-```
+{% endhighlight %}
 
 The above command sends the cookie named `utm_market` to the site with the content `abc123`. A use case for this  would be to set a cookie that is expected to exclude a page from cache and using the `-IL` flags see what cache headers are returned.
 
 The other example is using the cookie-jar to save cookies received from a website:
 
-```
+{% highlight shell %}
 Standard output:
 curl -c - https://example.com -IL
 
 Save to a file:
 curl -c my_cookie_file.txt https://example.com -IL
-```
+{% endhighlight %}
 
 The output when writing to the standard output would be as follows:
 
-```
+{% highlight shell %}
 curl -c - https://example.com -IL
 HTTP/2 200
 date: Sun, 29 Nov 2020 06:00:48 GMT
@@ -132,34 +132,34 @@ referrer-policy: strict-origin
 
 HttpOnly_.example.com       TRUE    /       FALSE   1609221648      __cfduid        a32d321872f624290a71bdf44c5a2d8281606629648
 example.com  FALSE   /       FALSE   1606629648      wp_visit_time_test      deleted
-```
+{% endhighlight %}
 
 ### User Agents, Referrers and IPs
 Setting User Agents can sometimes help me track down my specific request within logs when troubleshooting. Setting the other elements can also help test server side rules such as rules blocking User Agents, referrers or specific IP addresses.
 
 Setting a custom User Agent is as simple as adding the `-A` or`--user-agent` such as:
 
-```
+{% highlight shell %}
 cURL
 curl -A "My test User Agent" https://example.com
 
 Log entry
 123.123.123.123 example.com - &#91;29/Nov/2020:06:06:21 +0000] "GET / HTTP/1.0" 200 28406 "-" "My test User Agent"
-```
+{% endhighlight %}
 
 A referrer works much the same as the User Agent by setting it with the `-e` or `--referer` (please note that the spelling is with a single <strong>r</strong>). This is again extremely useful when testing server side rules that alter the site behavior depending on referrer.:
 
-```
+{% highlight shell %}
 cURL
 curl -e "https://mysite.com" https://example.com
 
 Log entry
 123.123.123.123 example.com - &#91;29/Nov/2020:06:10:05 +0000] "GET / HTTP/1.0" 200 28406 "https://mysite.com" "curl/7.58.0"
-```
+{% endhighlight %}
 
 You can even set the IP address your request is coming from, thus spoofing the origin of the request. Of note, for this to work you will need to ensure that the server you are requesting from has `real_ip_header X-True-client-IP;` set. By sending the header `X-True-Client-IP: [your IP]`, the server will interpret and use the value provided when handling the request. The following headers are ideal for this:
 
-```
+{% highlight shell %}
 NGINX Server headers:
 
 set_real_ip_from 0.0.0.0/0;
@@ -168,7 +168,7 @@ real_ip_recursive on;
 
 cURL
 curl -IL --header "X-True-Client-IP: 12.34.56.78" https://example.com
-```
+{% endhighlight %}
 
 The above can be useful if you are trying to determine whether an IP address is blocked by a firewall or specific server side rules affecting specific IP addresses are working as expected such as geo-location based redirects or content is being delivered as expected..
 
@@ -176,9 +176,9 @@ The above can be useful if you are trying to determine whether an IP address is 
 
 By default, `cURL` will use the `GET` method. By providing the `-X` flag you can change the method to different [HTTP Request methods](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods). Sending a post request can significantly change how the server responds to your request, for example with WordPress sites, the `xmlrpc.php` file will require a `POST` method to interact with. Of note, when using the `-d` (`--data`) flag, `cURL` will automatically set the request method to `POST`. The below example is an example of a `POST` request using the data flag:
 
-```shell
+{% highlight shell %}
 curl -d '&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;methodCall&gt;&lt;methodName&gt;system.listMethods&lt;/methodName&gt;&lt;params&gt;&lt;/params&gt;&lt;/methodCall&gt;' <a rel="noreferrer noopener" target="_blank" href="https://yoursitenameat.wpengine.com/xmlrpc.php">https://example.com/xmlrpc.php</a> -A "cURL Tutorial"
-```
+{% endhighlight %}
 
 The data example will send a POST request with the <code>methodCall</code> to list all the available/supported methods via <code>xmlrpc.php</code> on a WordPress site.
 
@@ -186,28 +186,28 @@ The data example will send a POST request with the <code>methodCall</code> to li
 
 There are a number of methods to authenticate, primarily using basic authentication methods. This can be done by directly supplying the `username:password` combo to the URL or using the `-u` (`--user`) option. To note, providing just the username will prompt the user to enter their password:
 
-```
+{% highlight shell %}
 Set within the request:
 curl https://testUSER:password123@example.com
 
 or
 
 curl -u 'testUSER:password123' https://example.com
-```
+{% endhighlight %}
 
 A safer option than directly entering passwords and API key tokens into the shell is to use a `--netrc`. This uses the `.netrc` file in your users home directory. Alternatively using `--netrc-file` allows you to specify the file to use for authentication. The `.netrc` file uses the following format, where `machine` is the domain you are linking the authentication credentials to:
 
-```
+{% highlight shell %}
 machine example.com
 login userTEST
 password qwerty123
-```
+{% endhighlight %}
 
 An example of using the `--netrc` file to authenticate:
 
-```
+{% highlight shell %}
 curl --netrc https://example.com
-```
+{% endhighlight %}
 
 ### Conclusion
 

@@ -10,7 +10,7 @@ I've recently had a number of requests for custom NGINX rules to be created in o
 
 The following rule is specifically for static files, such as PDFs:
 
-```nginx
+{% highlight nginx %}
 if ( $uri ~* ^/wp-content/uploads/.+\.pdf$ ) {
     set $var 1;
 }
@@ -20,19 +20,19 @@ if ( $uri ~* ^/wp-content/uploads/.+\.pdf$ ) {
     if ( $var = 11 ) {
     return 403;
 }
-```
+{% endhighlight %}
 
 The above rule works by checking if the incoming request URI is looking for PDF files within `/wp-content/uploads/` and if so whether the `wordpress_logged_in` cookie is set. If it is not then return the `HTTP 403` response. Since [NGINX does not use `if/else` statements](https://www.nginx.com/resources/wiki/start/topics/depth/ifisevil/), we build out our rule using several `if` statements.
 Another example we can use is the following, which uses a location block to achieve similar:
 
-```nginx
+{% highlight nginx %}
 location ~* ^/wp-content/uploads/protected/(?!public_images/).+\.jpg$ {
     add_header Cache-Control "no-store; max-age=0";
     if ( $http_cookie !~* wordpress_logged_in ) {
         return 403;
     }
 }
-```
+{% endhighlight %}
 
 The above again uses a very similar process, however this time using a `location block`. In this case, we want to protect JPG images within the `/wp-content/uploads/protected` directory, however excluding the `public_images` directory.
 
