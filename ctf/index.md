@@ -15,8 +15,3 @@ title: CTF
 ### [flAWS Cloud 1](/ctf/flaws-cloud-1)
 
 ### [HTB Cyber Apocalypse 2021](/ctf/htb-cyber-apocalypse-2021)
-
-## 2020
-### [Over The Wire - Leviathan](/ctf/over-the-wire-leviathan)
-
-### [Over The Wire - Bandit](/ctf/bandit)
