@@ -1,9 +1,9 @@
-title: andras marton dot com
-email: mail@andrasmarton.com
+title: andras marton personal site
+email: mail@marton.pw
 description: >-
   My personal blog covering cyber security, programming and technology.
 baseurl: ""
-url: "https://www.andrasmarton.com"
+url: "https://marton.pw"
 include:
   - .well-known
 exclude:

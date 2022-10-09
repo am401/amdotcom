@@ -1,4 +1,4 @@
-Contact: mailto:security@andrasmarton.com
+Contact: mailto:security@marton.pw
 Preferred-Languages: en
-Canonical: https://www.andrasmarton.com/.well-known/security.txt
+Canonical: https://marton.pw/.well-known/security.txt
 

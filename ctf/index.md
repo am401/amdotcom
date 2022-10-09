@@ -3,7 +3,6 @@ layout: default
 title: CTF
 ---
 
-## 2021
 ### [TryHackMe Advent of Cyber 3 (2021)](/ctf/try-hack-me-advent-of-cyber-3-2021)
 
 ### [Cryptohack](/ctf/cryptohack)
