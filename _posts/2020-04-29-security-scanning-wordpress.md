@@ -82,9 +82,7 @@ As noted in the earlier example, it's possible to pass along an API token. It's 
 > The feature mentioned above is useful to keep the API Token in a config file and not have to supply it via the CLI each time. To do so, create the ~/.wpscan/scan.yml file containing the below:
 >
 > cli_options:
->
 > &nbsp;&nbsp;api_token:
->
 > &nbsp;&nbsp;&nbsp;YOUR_API_TOKEN
 {:.blockquote-style}
 
