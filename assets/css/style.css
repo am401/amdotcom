@@ -18,6 +18,8 @@ ul, li {
     font-size: 35px;
     color: #fff;
     font-family: sans-serif;
+    text-decoration: underline dotted #ff0000;
+    text-underline-offset: 3px;
 }
 
 .heading-right {
@@ -56,12 +58,12 @@ ul, li {
 
 a, a:visited {
     color: #0ebfe9;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 a:hover, a:active {
     color: #0b98ba;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 .ul-homepage {
