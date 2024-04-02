@@ -203,6 +203,7 @@ pre code {
     line-height: 1em;
     letter-spacing: normal;
     word-break: break-all;
+	text-indent: 0;
 }
 
 details > summary {
