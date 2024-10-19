@@ -14,22 +14,22 @@ The `Makefile` is pretty straight forward and it will run Docker with various co
  
 {% highlight shell %}
 serve:
-        docker run \
-                --rm \
-                -it \
-                --volume="$$PWD:/srv/jekyll" \
-                --volume="$$PWD/vendor/bundle:/usr/local/bundle" \
-                -p 4000:4000 \
-                jekyll/jekyll:4.2.0 \
-                jekyll serve
+    docker run \
+            --rm \
+            -it \
+            --volume="$$PWD:/srv/jekyll" \
+            --volume="$$PWD/vendor/bundle:/usr/local/bundle" \
+            -p 4000:4000 \
+            jekyll/jekyll:4.2.0 \
+            jekyll serve
 
 build:
-        docker run \
-                --rm \
-                -it \
-                --volume="$$PWD:/srv/jekyll" \
-                jekyll/jekyll:4.2.0 \
-                jekyll build
+    docker run \
+            --rm \
+            -it \
+            --volume="$$PWD:/srv/jekyll" \
+            jekyll/jekyll:4.2.0 \
+            jekyll build
 {% endhighlight %}
 
 In the above we have two targets, `serve` and `build`. I most often use `serve` to run Jekyll locally in a Docker container, which I can access over `https://localhost:4000`. Using Docker's `--volume`, I can link files from my local filesystem to Docker in order to allow Jekyll to have the necessary bundles and other data.

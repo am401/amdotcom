@@ -1,3 +1,8 @@
+/*
+Version: 1.0.3
+Date last modified: 10/19/2024
+*/
+
 body {
     background-color: #3f3b3a;
     max-width: 960px;
@@ -175,6 +180,7 @@ img {
 /* Code block experiment */
 
 pre {
+	display: block;
     background-color: #262626;
     text-align: left;
     overflow: auto;
@@ -195,7 +201,8 @@ code {
     border-radius: 5px;
 }
 
-pre code {
+pre > code {
+	display: block;
     border: none;
     text-align: left;
     background: none;
