@@ -29,3 +29,7 @@ pkg/
 test/dest
 tmp/*
 Makefile
+
+# Environment file
+.env
+.venv
